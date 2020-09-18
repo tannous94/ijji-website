@@ -1,0 +1,108 @@
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #CCCCCC;
+}
+
+body {
+	background-color: #000000;
+	background-image: url(img/bg_body.gif);
+	background-repeat:repeat;
+	margin-left: 0px;
+	margin-top: 00px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+a:link {
+	color: #CCCCCC;
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+
+a:hover {
+	color: #FFFFFF;
+}
+
+a:active {
+	color: #CCCCCC;
+}
+
+.Estilo1 {
+	font-family: Verdana;
+	font-size: 9px;
+	font-weight: bold;
+	color: #CCCCCC;
+}
+
+.Estilo2 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #CCCCCC;
+}
+
+.Estilo3 {
+	font-size: 14px; 	color: #CCCCCC;
+}
+
+.Estilo4 {
+	font-size: 18px;
+	font-weight: bold;
+	color: #CCCCCC;
+}
+
+.Estilo8 {
+	font-family: Verdana;
+	font-size: 11px;
+	color: #0066FF;
+}
+
+.login {
+	font-size: 7pt; font-family: Verdana; color: #000000; 
+    border: 1px solid #000000; background-color: #FFFFFF; 
+}  
+
+.login2 {
+	font-size: 9pt; font-family: Verdana; color: #FFFFFF; 
+    border: 1px solid #2d3f4c; background-color: #476173; 
+
+}  
+
+.login3 {
+	font-size: 7pt; font-family: Verdana; color: #FFFFFF; 
+    border: 1px solid #2d3f4c; background-color: #476173; 
+}  
+
+.login4 {
+	font-size: 7pt; font-family: Verdana; color: #000000; 
+    border: 2px solid #dfdfdf; background-color: #FFFFFF; 
+} 
+
+.errorbox {
+	font-size: 7pt; font-family: Verdana; color: #FFFFFF; 
+    border: 1px solid #000000; background-color: #151515; 
+}  
+
+.Estilo5 {
+	font-family: Verdana;
+	font-size: 9px;
+	color: #505050;
+}
+
+.Estilo6 {
+	font-family: Verdana;
+	font-size: 9px;
+	font-weight: bold;
+	color: #CCCCCC;
+}
+
+.Estilo7 {
+	font-family: Verdana;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
