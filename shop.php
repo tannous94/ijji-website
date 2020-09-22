@@ -63,7 +63,7 @@ function MM_swapImage() { //v3.0
         <td align="center" class="Estilo1" height="25"></td>
       </tr>
       <tr>
-	  
+	   <td align="center" class="Estilo1" height="25">Note: almost all of single items are in the last pages</td>
       </tr>
       <tr>
         <td align="center" class="Estilo1" height="25"></td>
@@ -75,38 +75,75 @@ function MM_swapImage() { //v3.0
 		<tbody><tr>
 			<td width="449" height="20" colspan="2"></td>
 		</tr>
-		<tr>
 		
-				            <td width="208" height="100" align="center">
+		<?php
+		// Must have at least 10 items in CoinsShop table for this to work
+		$res2 = odbc_exec($connect, "SELECT * FROM CoinsShop ORDER BY GCIID DESC");
+		$num = odbc_num_rows($res2);
+		
+		$divby10 = ceil($num / 10);
+				
+		
+		if (isset($_GET['page'])) {
+			
+			$j = 1;
+			while ($j <= $divby10) {
+				if ($_GET['page'] == $j) {
+					$res1 = odbc_exec($connect, "SELECT * FROM CoinsShop WHERE GCIID > 10 * ($j - 1) AND GCIID <= 10 * $j");
+				} else if ($_GET['page'] > $divby10) {
+					
+					echo '<script language="javascript">';
+					echo 'document.location = "shop.php"';
+					echo '</script>';
+					die();
+		
+				}
+				$j++;
+			}
+		} else {
+			$res1 = odbc_exec($connect, "SELECT * FROM CoinsShop WHERE GCIID > 0 AND GCIID <= 10");
+		}
+
+			$i = 1;
+			
+			while ($items = odbc_fetch_array($res1)) {
+		
+		
+				if ($i == 1) {
+					echo '<tr>';
+				}
+		?>
+		
+		<td width="208" height="100" align="center">
 			      <table width="250" border="0">
                     <tbody><tr>
-                      <td width="104" rowspan="7" valign="top"><img border="2" src="img/shop/pioneer.gif" width="100" height="100" style="border-width: 1px; border-style: solid; border-color: #000000;"></td>
+                      <td width="104" rowspan="7" valign="top"><img border="2" src="img/shop/<?php echo $items['WebImg']; ?>" width="100" height="100" style="border-width: 1px; border-style: solid; border-color: #000000;"></td>
                       <td colspan="2" class="estilo8" align="left">
                          <b></b>
                       </td>
                     </tr>
                     <tr>
                       <td width="64" class="estilo5" align="left">Type:</td>
-                      <td width="68" class="estilo5" align="right">Ranged</td>
+                      <td width="68" class="estilo5" align="right"><?php echo $items['ItemType']; ?></td>
                     </tr>
                     <tr>
                       <td class="estilo5" align="left">Sex:</td>
-                      <td class="estilo5" align="right">Both</td>
+                      <td class="estilo5" align="right"><?php echo $items['Sex']; ?></td>
                     </tr>
                     <tr>
                       <td class="estilo5" align="left">Level:</td>
-                      <td class="estilo5" align="right">40</td>
+                      <td class="estilo5" align="right"><?php echo $items['ItemLv']; ?></td>
                     </tr>
                     <tr>
                       <td class="estilo5" align="left">Price:</td>
-                      <td class="estilo5" align="right">150</td>
+                      <td class="estilo5" align="right"><?php echo $items['Price']; ?></td>
                     </tr>
                     <tr>
                       <td colspan="2"><table width="100%" border="0" align="center">
                           <tbody><tr>
-                            <td><a href="item.php?id=5"><img src="img/btn_itmshp_details.gif" width="47" height="19" border="0"></a></td>
-                            <td><a href="item.php?id=5"><img src="img/btn_itmshp_buy02.gif" width="47" height="19" border="0"></a></td>
-							<td><a href="item.php?id=5"><img src="img/btn_itmshp_gift.gif" width="47" height="19" border="0"></a></td>
+                            <td><a href="item.php?id=<?php echo $items['GCIID']; ?>"><img src="img/btn_itmshp_details.gif" width="47" height="19" border="0"></a></td>
+                            <td><a href="item.php?id=<?php echo $items['GCIID']; ?>"><img src="img/btn_itmshp_buy02.gif" width="47" height="19" border="0"></a></td>
+							<td><a href="item.php?id=<?php echo $items['GCIID']; ?>"><img src="img/btn_itmshp_gift.gif" width="47" height="19" border="0"></a></td>
                           </tr>
                       </tbody></table></td>
                     </tr>
@@ -114,121 +151,37 @@ function MM_swapImage() { //v3.0
                       <td colspan="2" height="20"></td>
                     </tr>
                   </tbody></table></td>
-			            <td width="208" height="100" align="center">
-			      <table width="250" border="0">
-                    <tbody><tr>
-                      <td width="104" rowspan="7" valign="top"><img border="2" src="img/shop/repairkit_MX2.gif" width="100" height="100" style="border-width: 1px; border-style: solid; border-color: #000000;"></td>
-                      <td colspan="2" class="estilo8" align="left">
-                         <b></b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="64" class="estilo5" align="left">Type:</td>
-                      <td width="68" class="estilo5" align="right">Special</td>
-                    </tr>
-                    <tr>
-                      <td class="estilo5" align="left">Sex:</td>
-                      <td class="estilo5" align="right">Both</td>
-                    </tr>
-                    <tr>
-                      <td class="estilo5" align="left">Level:</td>
-                      <td class="estilo5" align="right">15</td>
-                    </tr>
-                    <tr>
-                      <td class="estilo5" align="left">Price:</td>
-                      <td class="estilo5" align="right">150</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><table width="100%" border="0" align="center">
-                          <tbody><tr>
-                            <td><a href="item.php?id=4"><img src="img/btn_itmshp_details.gif" width="47" height="19" border="0"></a></td>
-                            <td><a href="item.php?id=4"><img src="img/btn_itmshp_buy02.gif" width="47" height="19" border="0"></a></td>
-							<td><a href="item.php?id=4"><img src="img/btn_itmshp_gift.gif" width="47" height="19" border="0"></a></td>
-                          </tr>
-                      </tbody></table></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" height="20"></td>
-                    </tr>
-                  </tbody></table></td>
-			</tr>			<tr><td width="208" align="center">
-				<table width="250" border="0">
-                  <tbody><tr>
-                    <td width="104" rowspan="7" valign="top"><img border="2" src="img/shop/medkit_MX2.gif" width="100" height="100" style="border-width: 1px; border-style: solid; border-color: #000000;"></td>
-                    <td colspan="2" class="estilo8" align="left">
-                       <b></b>                    </td>
-                  </tr>
-                  <tr>
-                    <td width="64" class="estilo5" align="left">Type:</td>
-                    <td width="68" class="estilo5" align="right">Special</td>
-                  </tr>
-                  <tr>
-                    <td class="estilo5" align="left">Sex:</td>
-                    <td class="estilo5" align="right">Both</td>
-                  </tr>
-                  <tr>
-                    <td class="estilo5" align="left">Level:</td>
-                    <td class="estilo5" align="right">15</td>
-                  </tr>
-                  <tr>
-                    <td class="estilo5" align="left">Price:</td>
-                    <td class="estilo5" align="right">150</td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><table width="100%" border="0" align="center">
-                        <tbody><tr>
-                            <td><a href="item.php?id=3"><img src="img/btn_itmshp_details.gif" width="47" height="19" border="0"></a></td>
-                            <td><a href="item.php?id=3"><img src="img/btn_itmshp_buy02.gif" width="47" height="19" border="0"></a></td>
-							<td><a href="item.php?id=3"><img src="img/btn_itmshp_gift.gif" width="47" height="19" border="0"></a></td>
-                          </tr>
-                    </tbody></table></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" height="20"></td>
-                  </tr>
-                </tbody></table></td>
-                        <td width="208" height="100" align="center">
-			      <table width="250" border="0">
-                    <tbody><tr>
-                      <td width="104" rowspan="7" valign="top"><img border="2" src="img/shop/thor.png" width="100" height="100" style="border-width: 1px; border-style: solid; border-color: #000000;"></td>
-                      <td colspan="2" class="estilo8" align="left">
-                         <b></b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="64" class="estilo5" align="left">Type:</td>
-                      <td width="68" class="estilo5" align="right">Ranged</td>
-                    </tr>
-                    <tr>
-                      <td class="estilo5" align="left">Sex:</td>
-                      <td class="estilo5" align="right">Both</td>
-                    </tr>
-                    <tr>
-                      <td class="estilo5" align="left">Level:</td>
-                      <td class="estilo5" align="right">40</td>
-                    </tr>
-                    <tr>
-                      <td class="estilo5" align="left">Price:</td>
-                      <td class="estilo5" align="right">200</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><table width="100%" border="0" align="center">
-                          <tbody><tr>
-                            <td><a href="item.php?id=2"><img src="img/btn_itmshp_details.gif" width="47" height="19" border="0"></a></td>
-                            <td><a href="item.php?id=2"><img src="img/btn_itmshp_buy02.gif" width="47" height="19" border="0"></a></td>
-							<td><a href="item.php?id=2"><img src="img/btn_itmshp_gift.gif" width="47" height="19" border="0"></a></td>
-                          </tr>
-                      </tbody></table></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" height="20"></td>
-                    </tr>
-                  </tbody></table></td>
-					</tr>
+			
+		
+		<?php
+		
+				if ($i == 2) {
+					echo '</tr>';
+					$i = 1;
+				} else {
+					$i++;
+				}
+			}
+		?>
 	</tbody></table></td>
       </tr>
       <tr>
         <td align="right" class="Estilo1" height="25">					
+		</td>
+      </tr>
+	   <tr>
+        <td align="center" style="color: black; font-size: 15px;" height="25">
+			<?php
+			
+			$page = 1;
+			while ($page <= $divby10) {
+				
+				echo '[<a style="color: blue;" href="shop.php?sub=items&page=' . $page . '">' . $page . '</a>] ';	
+				
+				$page++;
+			}
+			
+			?>
 		</td>
       </tr>
       <tr>
@@ -476,6 +429,22 @@ function MM_swapImage() { //v3.0
             <tr>
               <td align="center" background="img/lbox01_b.gif" style="background-repeat:no-repeat; background-position:bottom" height="6"></td>
             </tr>
+<?php
+				if (isset($_SESSION['AID'])) {
+					$cc = odbc_exec($connect, "SELECT Coins FROM Account WHERE AID='" . $_SESSION['AID'] . "'");
+					$acc_coins = odbc_fetch_array($cc);
+
+				
+			?>
+			<tr>
+              <td align="center">
+			  <div style="padding-bottom:15px;"></div>
+			  <div style="border-radius: 10px; color: #023461; padding-top:10px; padding-bottom:10px; font-size:15px; background-color: white;">G Coins: <b><?php echo $acc_coins['Coins']; ?></b></div>
+			  </td>
+            </tr>
+			<?php
+				}
+			?>
           </tbody></table>
 		  <br><img src="img/warning_banner.gif" width="140" height="91"></td>
       </tr>
